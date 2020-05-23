@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link rel="stylesheet" th:href="@{/css/signin.css}" href="../static/css/signin.css">
+  <title>Profile</title>
+  <link rel="icon" href ="../static/images/icon.png" th:href="@{/images/icon.png}" type="image/png">
+</head>
+
+<body class="text-center">
+
+
+  <form class="form-signin" action="#" th:object=${userProfile} th:action="@{/profile/update}" method="post">
+
+    <h1 class="h3 mb-3 font-weight-normal">Profile</h1>
+    <div th:if="${error != null}" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <span th:text="${error}">Error!</span>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <label hidden for="inputid" class="">Id</label>
+    <input hidden type="number" required th:field="*{id}" id="inputid" class="form-control" placeholder="Id" autofocus>
+    <label for="inputFirstName" class="">First Name</label>
+    <input type="text" required th:disabled="!${isUpdatePage}" th:field="*{firstName}" id="inputFirstName"
+      class="form-control" placeholder="First Name" autofocus>
+    <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>
+    <br />
+    <label for="inputLastName" class="">Last Name</label>
+    <input type="text" required th:disabled="!${isUpdatePage}" th:field=*{lastName} id="inputLastName" class="form-control" placeholder="Last Name"
+      autofocus>
+      <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>
+    <br />
+    <label th:if="!${isUpdatePage}" for="categories" class="">Subscribed Categories:</label>    
+	<ul th:if="!${isUpdatePage}" >
+		<li th:each="category : *{categories}" th:text="${category}"></li>
+	</ul>
+	<label th:if="${isUpdatePage}" for="categories" class="">Subscribe Categories:</label>
+	<ul th:if="${isUpdatePage}" >
+		<li th:each="category: ${categories}">
+		<input type="checkbox" th:field=*{categories} th:value="${category}">
+		<label th:text="${category}">Category</label>
+		</li>
+	</ul>
+	<a href="#" th:href="@{/profile/update}" th:attr="hidden=${isUpdatePage}" class="btn btn-lg btn-info btn-block" >Update Profile</a>
+    <button class="btn btn-lg btn-success btn-block" th:attr="hidden=!${isUpdatePage}" type="submit">Update</button>
+    <a th:attr="hidden=${isUpdatePage}" class="btn btn-lg btn-warning btn-block" href="#" th:href="@{/profile/updatePassword}">Change Password</a>
+    <button th:attr="hidden=!${isUpdatePage}" class="btn btn-lg btn-danger btn-block" type="reset">Reset</button>
+    <a href="#" th:href="@{/}" class="btn btn-lg btn-primary btn-block" >Go Home</a>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,196 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="../static/css/newsfeed.css" th:href="@{/css/newsfeed.css}">
+	<link rel="stylesheet" type="text/css" href="../static/css/navbar.css" th:href="@{/css/navbar.css}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>News</title>
+	<link rel="icon" href ="../static/images/icon.png" th:href="@{/images/icon.png}" type="image/png">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#" th:href="@{/}">Newzfeed</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="#" th:href="@{/headlines}">Headlines <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Categories </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a sec:authorize="isAuthenticated()" class="dropdown-item" href="#" th:href="@{/custom}">For
+							you</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/covid}">COVID-19</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/general}">General</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/business}">Business</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/entertainment}">Entertainment</a> <a
+							class="dropdown-item" href="#" th:href="@{/category/health}">Health</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/science}">Science</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/sports}">Sports</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/technology}">Technology</a>
+					</div>
+				</li>
+				<li class="nav-item active"><a class="nav-link" href="#" th:href="@{/about}">About Us<span
+							class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+			<div sec:authorize="isAuthenticated()" class="dropdown show nav-item nav-link">
+				<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">
+					<span th:if="${user != null}" th:text="${user.firstName}">User</span>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<a class="dropdown-item" href="#" th:href="@{/profile}">Profile</a>
+					 <div class="dropdown-divider"></div>
+					<form action="#" method="POST" th:action="@{/logout}">
+						<input class="dropdown-item" type="submit" value="Logout">
+					</form>
+				</div>
+			</div>
+			<a sec:authorize="!isAuthenticated()" class="nav-item nav-link" href="#" th:href="@{/login}">Login</a>
+			<form action="#" th:action="@{/search}" method="get" class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="search" name="query" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+				<div class="position-sticky pt-3">
+					<ul class="nav flex-column">
+						<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" aria-current="page"
+								href="#" th:href="@{/custom}"> <i class="fa fa-user-circle" aria-hidden="true"></i>
+								For You
+							</a></li>
+						<li class="nav-item"><a class="nav-link" aria-current="page" href="#"
+								th:href="@{/category/covid}"> <i class="fa fa-ambulance" aria-hidden="true"></i>
+								COVID-19
+							</a></li>
+						<li class="nav-item"><a class="nav-link" aria-current="page" href="#"
+								th:href="@{/category/general}"> <i class="fa fa-hashtag" aria-hidden="true"></i> General
+							</a></li>
+						<li class="nav-item"><a class="nav-link" href="#" th:href="@{/category/business}"> <i
+									class="fa fa-briefcase" aria-hidden="true"></i> Business
+							</a></li>
+						<li class="nav-item"><a class="nav-link" href="#" th:href="@{/category/entertainment}"> <i
+									class="fa fa-television" aria-hidden="true"></i> Entertainment
+							</a></li>
+						<li class="nav-item"><a class="nav-link" href="#" th:href="@{/category/health}"> <i
+									class="fa fa-user-md" aria-hidden="true"></i> Health
+							</a></li>
+						<li class="nav-item"><a class="nav-link" href="#" th:href="@{/category/science}"> <i
+									class="fa fa-flask" aria-hidden="true"></i> Science
+							</a></li>
+						<li class="nav-item"><a class="nav-link" href="#" th:href="@{/category/sports}"> <i
+									class="fa fa-futbol-o" aria-hidden="true"></i> Sports
+							</a></li>
+						<li class="nav-item"><a class="nav-link" href="#" th:href="@{/category/technology}"> <i
+									class="fa fa-tablet" aria-hidden="true"></i> Technology
+							</a></li>
+					</ul>
+				</div>
+			</nav>
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+				<span hidden="true" id="category" th:text="${category}">No
+					category</span>
+				<h2 class="text-center" th:text="${heading}">Heading</h2>
+				<div th:if="${warning != null}" class="alert alert-warning alert-dismissible fade show" role="alert">
+					<span th:text='${message}'>Warning Massage!</span>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div th:if="${error != null}" class="alert alert-danger alert-dismissible fade show" role="alert">
+					<span th:text='${message}'>Error Massage!</span>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="text-center" th:if="${articles}==null">No news</div>
+				<div class="container-fluid margin">
+					<div class="row">
+						<div class="col-md-3" th:each=" article : ${articles}">
+							<div class="card text-Black ">
+								<img src="#" class="card-img-top" alt="No image found" th:src="${article.urlToImage}">
+								<div class="card-body">
+									<h5 class="card-title" th:text="${article.title}">Title of
+										the news</h5>
+									<p>
+										<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample"
+											th:href="'#collapseExample'+${articleStat.index}" role="button"
+											aria-expanded="false" aria-controls="collapseExample">Click for Details</a>
+									</p>
+									<div class="collapse" id="collapseExample"
+										th:id="'collapseExample'+${articleStat.index}">
+										<div class="card card-body" th:text="${article.content}">Content
+											of article.</div>
+									</div>
+									<p class="card-text">
+										<small>Source: <span th:text="${article.source.name}">not
+												Available</span>
+										</small><br />
+										<small> Published at: <span th:text="${article.publishedDate}">Date not
+												found</span>
+										</small>
+										<a class="card-link" href="https://www.google.com" th:href="${article.url}">Read
+											more</a>
+									</p>
+									<div class="text-center">
+										<a class="card-link" href="#"
+											th:href="'https://www.facebook.com/sharer/sharer.php?u='+${article.url}"
+											target="_blank"><i class="fa fa-2x fa-facebook-square"
+												aria-hidden="true"></i></a>
+										<a href="#" th:href="'https://api.whatsapp.com/send?text='+${article.url}"
+											target="_blank"><i class="fa fa-2x fa-whatsapp" aria-hidden="true"></i></a>
+										<a href="#" th:href="'https://twitter.com/share?url='+${article.url}"
+											target="_blank"><i class="fa fa-2x fa-twitter-square"
+												aria-hidden="true"></i></a>
+										<a href="#"
+											th:href="'https://www.linkedin.com/shareArticle?mini=true&url='+${article.url}+'&title='+${article.title}+'&summary='+${article.content}+'&source='+${article.url}"
+											target="_blank"><i class="fa fa-2x fa-linkedin-square"
+												aria-hidden="true"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<li class="page-item" th:classappend="${page == 1}?disabled:''"><a class="page-link" href="#"
+								th:href="@{${linkPrevious}}" tabindex="-1" aria-disabled="true">Previous</a></li>
+						<li class="page-item"><a class="page-link" href="#" th:href=@{${linkNext}}>Next</a>
+						</li>
+					</ul>
+				</nav>
+			</main>
+		</div>
+	</div>
+
+	<script src="../static/js/newsfeed.js" th:src="@{/js/newsfeed.js}"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

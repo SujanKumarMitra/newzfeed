@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link rel="stylesheet" th:href="@{/css/signin.css}" href="../static/css/signin.css">
+  <title>Sign Up</title>
+  <link rel="icon" href ="../static/images/icon.png" th:href="@{/images/icon.png}" type="image/png">
+</head>
+
+<body class="text-center">
+
+  <form class="form-signin" action="#" th:object=${signupUser} th:action="@{/signup}" method="post">
+
+    <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+    <div th:if="${error != null}" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <span th:text="${error}">Error!</span>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <label for="inputFirstName" class="sr-only">First Name</label>
+    <input type="text" required th:field="*{firstName}" id="inputFirstName" class="form-control"
+      placeholder="First Name" autofocus>
+    <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>
+    <br />
+    <label for="inputLastName" class="sr-only">Last Name</label>
+    <input type="text" required th:field=*{lastName} id="inputLastName" class="form-control" placeholder="Last Name"
+      autofocus>
+      <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>
+    <br />
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" required th:field=*{email} id="inputEmail" class="form-control" placeholder="Email address" 
+      autofocus>
+      <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
+    <br />
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input title="Minimum 8 characters" required type="password" th:field="*{password}" id="inputPassword" class="form-control" placeholder="Password" >
+    <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
+    <br />
+    <label for="inputConfirmPassword" class="sr-only">Confirm Password</label>
+    <input type="password" required th:field="*{confirmPassword}" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" >
+    <span class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Repeat Password Error</span>
+
+    <br />
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+    <button class="btn btn-lg btn-primary btn-block" type="reset">Reset</button>
+    <h5>Already Signed up?</h5>
+    <a class="btn btn-lg btn-primary btn-block" href="#" th:href="@{/login}">Log in</a>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

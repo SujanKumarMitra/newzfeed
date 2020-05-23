@@ -1,0 +1,11 @@
+com.herokuapp.newsfeedapp
+com.herokuapp.newsfeedapp.configuration
+com.herokuapp.newsfeedapp.controller
+com.herokuapp.newsfeedapp.dto
+com.herokuapp.newsfeedapp.entity
+com.herokuapp.newsfeedapp.exception
+com.herokuapp.newsfeedapp.model
+com.herokuapp.newsfeedapp.repository
+com.herokuapp.newsfeedapp.security
+com.herokuapp.newsfeedapp.service
+com.herokuapp.newsfeedapp.util

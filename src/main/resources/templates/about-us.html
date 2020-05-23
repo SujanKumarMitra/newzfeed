@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<title>About Us</title>
+	<link rel="icon" href ="../static/images/icon.png" th:href="@{/images/icon.png}" type="image/png">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#" th:href="@{/}">Newzfeed</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="#" th:href="@{/headlines}">Headlines <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Categories </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a sec:authorize="isAuthenticated()" class="dropdown-item" href="#" th:href="@{/custom}">For
+							You</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/covid}">COVID-19</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/general}">General</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/business}">Business</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/entertainment}">Entertainment</a> <a
+							class="dropdown-item" href="#" th:href="@{/category/health}">Health</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/science}">Science</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/sports}">Sports</a>
+						<a class="dropdown-item" href="#" th:href="@{/category/technology}">Technology</a>
+					</div>
+				</li>
+				<li class="nav-item active"><a class="nav-link" href="#" th:href="@{/about}">About Us<span
+							class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+			<div sec:authorize="isAuthenticated()" class="dropdown show nav-item nav-link">
+				<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">
+					<span th:if="${user != null}" th:text="${user.firstName}">User</span>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<a class="dropdown-item" href="#" th:href="@{/profile}">Profile</a>
+					 <div class="dropdown-divider"></div>
+					<form action="#" method="POST" th:action="@{/logout}">
+						<input class="dropdown-item" type="submit" value="Logout">
+					</form>
+				</div>
+			</div>
+			<a sec:authorize="!isAuthenticated()" class="nav-item nav-link" href="#" th:href="@{/login}">Login</a>
+			<form action="#" th:action="@{/search}" method="get" class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="search" name="query" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+	<div class="jumbotron">
+		<div class="container-fluid">
+			<h2 class="text-center">Welcome to Newzfeed!</h2>
+			<p>
+				The goal of Newzfeed is to give you the absolute best news sources for any topic!<br/>
+				Our topics are carefully curated and constantly updated as we know <br/>
+				the web moves fast so we designed an application that collects relevant news articles from reputed sources from around the world and displays them to our users with a single click of a button. 
+				<br/>Our application also classifies these articles into different categories. 
+				<hr/>
+				This project is done in partial fulfillment of the requirement for the award of the degree of<br/>
+				BACHELOR OF TECHNOLOGY IN COMPUTER SCIENCE AND ENGINEERING from MAULANA ABUL KALAM AZAD UNIVERSITY OF TECHNOLOGY<br/>
+				formerly known as WEST BENGAL UNIVERSITY OF TECHNOLOGY 
+				submitted by 
+				<ul>
+					<li>Sujan Kumar Mitra</li>
+					<li>Ritam Sengupta</li>
+					<li>Soumyadev Sanyal</li>
+					<li>Siddhartha Addy</li>
+					<li>Sachin Sinha</li>
+				</ul>
+				under the guidance of <br/>
+				<ul>
+				<li><strong>Dr. Diganta Sengupta </strong> (Associate Professor, Department of Computer Science and Engineering).</li>
+				</ul>
+			</p>
+			
+		</div>
+		</div>
+		<footer class="text-center footer mt-auto py-3">
+		  <div class="container">
+		    <span class="">Powered by <a href="https://newsapi.org/" >News API</a></span>
+		  </div>
+	  </footer>
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+			crossorigin="anonymous"></script>
+</body>
+
+</html>
