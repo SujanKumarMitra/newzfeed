@@ -1,4 +1,4 @@
-# <img src = "src/main/resources/static/images/icon.png" width="150px" alt = "logo" /> Newsfeed App
+# <img src = "src/main/resources/static/images/icon.png" width="75px" alt = "logo" /> Newzfeed App
 A <a href ="https://spring.io/projects/spring-boot">Spring Boot</a> Application which displays curated news articles to users. <br/>
 Link: [Heroku](https://newzfeed.herokuapp.com) OR https://newzfeed.herokuapp.com/                       
 
